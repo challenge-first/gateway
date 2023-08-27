@@ -32,7 +32,72 @@ spring:
               - PATCH
               - DELETE
       routes:
-        ${ROUTES}
+        - id: member-server
+          uri: lb://MEMBER-SERVER
+          predicates:
+            - Path=/member-server/members/login
+            - Method=POST
+          filters:
+            - RewritePath=/member-server/(?<segment>.*), /$\{segment}
+        - id: member-server
+          uri: lb://MEMBER-SERVER
+          predicates:
+            - Path=/member-server/actuator/**
+            - Method=GET,POST
+          filters:
+            - RewritePath=/member-server/(?<segment>.*), /$\{segment}
+            - RemoveRequestHeader= Cookie, Set-Cookie
+        - id: member-server
+          uri: lb://MEMBER-SERVER
+          predicates:
+            - Path=/member-server/members/**
+          filters:
+            - AuthorizationFilter
+            - RewritePath=/member-server/(?<segment>.*), /$\{segment}
+        - id: order-server
+          uri: lb://ORDER-SERVER
+          predicates:
+            - Path=/order-server/actuator/**
+            - Method=GET,POST
+          filters:
+            - RewritePath=/order-server/(?<segment>.*), /$\{segment}
+        - id: order-server
+          uri: lb://ORDER-SERVER
+          predicates:
+            - Path=/order-server/orders/**
+            - Method=POST
+          filters:
+            - AuthorizationFilter
+            - RewritePath=/order-server/(?<segment>.*), /$\{segment}
+        - id: product-server
+          uri: lb://PRODUCT-SERVER
+          predicates:
+            - Path=/product-server/actuator/**
+            - Method=GET,POST
+          filters:
+            - RewritePath=/product-server/(?<segment>.*), /$\{segment}
+        - id: product-server
+          uri: lb://PRODUCT-SERVER
+          predicates:
+            - Path=/product-server/products/**
+            - Method=POST,GET
+          filters:
+            - RewritePath=/product-server/(?<segment>.*), /$\{segment}
+        - id: auction-server
+          uri: lb://AUCTION-SERVER
+          predicates:
+            - Path=/auction-server/actuator/**
+            - Method=GET,POST
+          filters:
+            - RewritePath=/auction-server/(?<segment>.*), /$\{segment}
+        - id: auction-server
+          uri: lb://AUCTION-SERVER
+          predicates:
+            - Path=/auction-server/auctions/**
+            - Method=POST,GET
+          filters:
+            - RewritePath=/auction-server/(?<segment>.*), /$\{segment}
+            - AuthorizationFilter
 
 management:
   endpoints:
