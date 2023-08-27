@@ -1,0 +1,47 @@
+server:
+  port: ${GATEWAY_PORT}
+  tomcat:
+    mbeanregistry:
+      enabled: true
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE}
+  instance:
+    hostname: localhost
+spring:
+  application:
+    name: apigateway-server
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: http://127.0.0.1:5500
+            allow-credentials: true
+            allowedHeaders: '*'
+            allowedMethods:
+              - GET
+              - POST
+              - OPTIONS
+              - PUT
+              - PATCH
+              - DELETE
+      routes:
+        ${ROUTES}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${ACTUATOR_END_POINT}
+  endpoint:
+    gateway:
+      enabled: true
+jwt:
+  secret:
+    key: ${JWT_SECRET_KEY}
