@@ -103,7 +103,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: ${ACTUATOR_END_POINT}
+        include: ${GATEWAY_ACTUATOR_END_POINT}
   endpoint:
     gateway:
       enabled: true
