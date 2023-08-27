@@ -55,6 +55,5 @@ jobs:
             --name ${{ secrets.PROJECT_NAME }} \
             -e EUREKA_DEFAULT_ZONE=${{ secrets.EUREKA_DEFAULT_ZONE }} \
             -e JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} \
-            -e ROUTES=${{ secrets.ROUTES }} \
             -e GATEWAY_PORT=${{ secrets.GATEWAY_PORT }} \
             -d ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
