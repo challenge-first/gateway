@@ -10,7 +10,7 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_DEFAULT_ZONE}
   instance:
-    hostname: 13.209.68.130
+    hostname: 172.31.46.202
 spring:
   application:
     name: apigateway-server
