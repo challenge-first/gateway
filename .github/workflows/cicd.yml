@@ -58,4 +58,5 @@ jobs:
             -e GATEWAY_PORT=${{ secrets.GATEWAY_PORT }} \
             -e GATEWAY_ACTUATOR_END_POINT=${{ secrets.GATEWAY_ACTUATOR_END_POINT }} \
             -e ZIPKIN_BASE_URL=${{ secrets.ZIPKIN_BASE_URL }} \
+            -e PRIVATE_IP=${{ secrets.PRIVATE_IP }} \ 
             -d ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
