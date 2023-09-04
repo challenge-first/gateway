@@ -109,6 +109,11 @@ spring:
             - Method=GET,POST
           filters:
             - RewritePath=/event-waiting-server/(?<segment>.*), /$\{segment}
+        - id: event-waiting-server
+          uri: lb://EVENT-WAITING-SERVER
+          predicates:
+            - Path=/event-waiting-server/actuator/**
+            - Method=POST,GET
 management:
   endpoints:
     web:
