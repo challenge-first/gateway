@@ -105,17 +105,17 @@ spring:
           filters:
             - RewritePath=/auction-server/(?<segment>.*), /$\{segment}
             - AuthorizationFilter
-        - id: event-waiting-server
-          uri: lb://EVENT-WAITING-SERVER
+        - id: event-server
+          uri: lb://EVENT-SERVER
           predicates:
-            - Path=/event-waiting-server/events/**
+            - Path=/event-server/events/**
             - Method=GET,POST
           filters:
-            - RewritePath=/event-waiting-server/(?<segment>.*), /$\{segment}
-        - id: event-waiting-server
-          uri: lb://EVENT-WAITING-SERVER
+            - RewritePath=/event-server/(?<segment>.*), /$\{segment}
+        - id: event-server
+          uri: lb://EVENT-SERVER
           predicates:
-            - Path=/event-waiting-server/actuator/**
+            - Path=/event-server/actuator/**
             - Method=POST,GET
 management:
   endpoints:
