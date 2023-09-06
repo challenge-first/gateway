@@ -25,7 +25,7 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: http://127.0.0.1:5500
+            allowedOrigins: https://64f7ef63dd155729aa5a8244--stalwart-sawine-cf07cc.netlify.app
             allow-credentials: true
             allowedHeaders: '*'
             exposedHeaders: '*'
